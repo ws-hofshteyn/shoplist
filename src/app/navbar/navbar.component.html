@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <button mat-button routerLink="/">
+    <mat-icon>home</mat-icon> 
+    Shop list
+  </button>
+
+  <span class="fill-remaining-space"></span>
+
+  <div fxLayout="row" fxHide fxShow.gt-sm>
+    <button mat-button routerLink="/list">Product list</button>
+    <button mat-button routerLink="/bucket">Bucket</button>
+  </div>
+</mat-toolbar>
