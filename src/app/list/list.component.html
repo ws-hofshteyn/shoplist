@@ -2,13 +2,11 @@
 <mat-list role="list">
   <mat-list-item
     role="listitem"
-    *ngFor="let product of products"
+    *ngFor="let product of products | async"
     >
     <button mat-icon-button color="warn">
       <mat-icon aria-label="add-product">add</mat-icon>
     </button>
-    <div [routerLink]="['/list', product.id]">
       {{product.name}}
-    </div>
   </mat-list-item>
 </mat-list>
