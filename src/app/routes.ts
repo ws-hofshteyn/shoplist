@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { ListComponent } from './list/list.component';
-import { BucketComponent } from './bucket/bucket.component';
-import { ProductComponent } from './product/product.component';
+import { ListComponent } from './components/list/list.component';
+import { BucketComponent } from './components/bucket/bucket.component';
+import { ProductComponent } from './components/product/product.component';
 
 export const routes: Routes = [
   { path: '',  redirectTo: '/list', pathMatch: 'full' },
