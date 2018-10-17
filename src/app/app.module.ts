@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,12 +15,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import {
   MatToolbarModule,
   MatButtonModule,
-  MatSidenavModule,
   MatIconModule,
   MatListModule,
-  MatGridListModule,
-  MatCardModule,
-  MatMenuModule
+  MatFormFieldModule,
+  MatInputModule,
 } from '@angular/material';
 import { routes } from './routes';
 import { ListComponent } from './components/list/list.component';
@@ -44,13 +43,12 @@ import { environment } from '../environments/environment';
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatCardModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

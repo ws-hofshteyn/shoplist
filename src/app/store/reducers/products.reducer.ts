@@ -19,6 +19,9 @@ export function productsReducer(state: ProductState = initialState, action: prod
     case productAction.GET_PRODUCTS:
       return {...state, loading: true};
 
+    case productAction.ADD_PRODUCT:
+      return {...state, loading: true};
+
     case productAction.RESPONSE_SUCCESS:
       return {...state, products: action.payload, loading: false};
 

@@ -30,4 +30,24 @@ export class ProductEffects {
         );
       })
     );
+
+    @Effect()
+    addProduct: Observable<Action> = this.actions$
+      .ofType(productAction.ADD_PRODUCT).pipe(
+        map((action: productAction.AddProduct) => action),
+        switchMap((action) => {
+          console.log('a', action.payload);
+          const ref = this.db.collection<Product>('products');
+          ref.add(action.payload);
+          return ref.stateChanges().pipe(
+            map(actions => {
+              return actions.map(item => {
+                return { id: item.payload.doc.id, ...item.payload.doc.data() };
+              });
+            }),
+            map(payload => new productAction.ResponseSuccess(payload)),
+            catchError(error => of(new productAction.ResponseError({error})))
+          );
+        })
+      );
 }
