@@ -1,30 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Product } from '../../models/product.model';
+  import { Component, OnInit } from '@angular/core';
+  import { Store } from '@ngrx/store';
+  import { ActivatedRoute, Params } from '@angular/router';
+  import { AppState } from '../../store/reducers';
+  import { getProducts } from '../../store/selectors/products.selector';
+  import { Product } from '../../models/product.model';
+  import { Observable, of, combineLatest, from } from 'rxjs';
+  import { filter, map, switchMap, mergeMap } from 'rxjs/operators';
 
-@Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
-})
-export class ProductComponent implements OnInit {
-  // public products: Product[] = [
-  //   new Product(1, 'Tomato'),
-  //   new Product(2, 'Potato'),
-  //   new Product(3, 'Apples')
-  // ];
-  product: Product = null;
+  @Component({
+    selector: 'app-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.scss']
+  })
+  export class ProductComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+    product: Product;
 
-  ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //   this.products.forEach((p: Product) => {
-    //     if (p.id === +params.id) {
-    //       this.product = p;
-    //     }
-    //   });
-    // });
+    constructor(private route: ActivatedRoute, private store: Store<AppState>) { }
+
+    ngOnInit() {
+
+      this.route.params.pipe(
+        switchMap((params: Params) => {
+          return this.store.select(getProducts).pipe(
+              mergeMap(products => {
+                const source = from(products);
+                return source.pipe(filter((product => product.id === params.id)));
+              })
+          );
+        })
+      ).subscribe(res => this.product = res);
+    }
   }
-
-}
