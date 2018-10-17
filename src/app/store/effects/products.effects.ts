@@ -4,7 +4,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Product } from '../../models/product.model';
-import * as productAction from './products.action';
+import * as productAction from '../actions/products.action';
 
 import { Observable, of } from 'rxjs';
 import { switchMap, map, mergeMap } from 'rxjs/operators';

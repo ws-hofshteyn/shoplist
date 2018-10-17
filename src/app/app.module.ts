@@ -25,8 +25,8 @@ import { routes } from './routes';
 import { ListComponent } from './components/list/list.component';
 import { BucketComponent } from './components/bucket/bucket.component';
 import { ProductComponent } from './components/product/product.component';
-import { ProductEffects } from './store/products/products.effects';
-import { ProductsReducer } from './store/products/products.reducer';
+import { ProductEffects } from './store/effects/products.effects';
+import { reducers } from './store/reducers';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -54,7 +54,7 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    StoreModule.forRoot({ message: ProductsReducer }),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ProductEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     !environment.production ? StoreDevtoolsModule.instrument() : []

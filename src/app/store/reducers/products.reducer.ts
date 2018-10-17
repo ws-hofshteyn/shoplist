@@ -1,24 +1,24 @@
 import { Product } from '../../models/product.model';
-import * as productAction from './products.action';
+import * as productAction from '../actions/products.action';
 
-export interface State {
+export interface ProductState {
   products: Product[];
   loading: boolean;
 }
 
-export const initialState: State = {
+export const initialState: ProductState = {
   products: [],
   loading: false,
 };
 
-export function ProductsReducer(state: State = initialState, action: productAction.Actions) {
+export function productsReducer(state: ProductState = initialState, action: productAction.Actions) {
 
   switch (action.type) {
     case productAction.GET_PRODUCTS:
       return {...state, loading: true};
 
     case productAction.GET_PRODUCTS_SUCCESS:
-      return {products: action.payload, loading: false};
+      return {...state, products: action.payload, loading: false};
 
     default:
         return state;
